@@ -1,9 +1,15 @@
+/*********************************************************************
+* Tetrix: node                                                             *
+*                                                                    *
+* Version: 1.0                                                       *
+* Date:    02-25-2018                                                *
+* Author:  Dan Machado                                               *                                         *
+**********************************************************************/
 #ifndef NODE_H
 #define NODE_H
 #include<SFML/Graphics.hpp>
 
 #include "helper.h"
-
 
 class Node
 {
@@ -38,36 +44,6 @@ inline bool Node::isActive()const {
 
 inline void Node::setColor(const sf::Color& color){
 	Rect.setFillColor(color);
-}
-
-void Node::setAddress(Node* c, char p){
-	if(p=='t'){
-		top=c;	
-	}
-	else if(p=='r'){
-		right=c;
-	}
-	else if(p=='b'){
-		bottom=c;
-	}
-	else if(p=='l'){
-		left=c;
-	}
-}
-
-Node* Node::getAddress(char c) const{
-	if(c=='t'){
-		return top;	
-	}
-	else if(c=='r'){
-		return right;
-	}
-	else if(c=='b'){
-		return bottom;
-	}
-	else if(c=='l'){
-		return left;
-	}
 }
 
 

@@ -1,65 +1,71 @@
+/*********************************************************************
+* Tetrix: manager                                                            *
+*                                                                    *
+* Version: 1.0                                                       *
+* Date:    02-25-2018                                                *
+* Author:  Dan Machado                                               *                                         *
+**********************************************************************/
 #ifndef MANAGER_H
 #define MANAGER_H
-#include "helper.h"
+
+#include<map>
+#include<iostream>
+#include<SFML/Graphics.hpp>
+
+#include "base.h"
 #include "node.h"
 #include "board.h"
 #include "tetromino.h"
 
+class Tetromino;
+typedef Tetromino* (*MkTetroid)();
+
 class Manager
 {
 	private:
-		Node* sed;
+		static std::map<char, MkTetroid> pieces; //array of pointers to different pieces
+		static std::vector<char> shapes;
+
+	private:
 	   sf::Color Bcolor;
 	   int* rows;
-	   Board* grid;	   
-	   Tetromino* tetroid;
-	   char shapes[7]={'T','Z','S','I','L','J','O'};
+	   Board* board;	   
+	   Tetromino* tetroid=NULL;
+		
 		void mkTetroid();
 		static Manager* instance;
-		Manager(Node* _sed, int* _rows, Board* G, sf::Color color);	
-	
+		Manager(int* _rows, Board* G, sf::Color color);	
+		Tetromino* mkTetromino(char c);
+
 	public:
 		~Manager();		
 		void resetRow(int r);
 		void shift(int mr, int t);
 		Tetromino* getTetroid();
 		void update(bool a);
-		static void init(Node* _sed, int* _rows, Board* G, sf::Color bcolor);
+		static void init(int* _rows, Board* G, sf::Color bcolor);
 		static Manager* getInstance();	
 
-	//=========================
+		static void registerShape(char c, MkTetroid);
 
-	class Supervisor{
-		private:Manager* manager;
-		public:Supervisor(Manager* _manager){
-			cout<<"New manager instance!!"<<endl;
-			manager=_manager;};
-		~Supervisor(){if(manager){
-				cout<<"Deleting Manager!!"<<endl;
-				delete manager;}
-		}
-	};
+		//=========================
+		// We use a class to handle the deletion of the singleton
+		class Supervisor{
+			private:
+				Manager* manager;
+			public:
+				Supervisor(Manager* _manager){
+					//cout<<"New manager instance!!"<<endl;
+					manager=_manager;
+				};
+				~Supervisor(){
+					if(manager){
+						//cout<<"Deleting Manager!!"<<endl;
+						delete manager;
+					}
+				}
+		};
 };
-//=========================
-
-Manager::~Manager(){
-	if(tetroid){
-		delete tetroid;
-	}
-}
-
-Manager* Manager::instance=NULL;
-
-Manager* Manager::getInstance(){
-	return instance;	
-}
-
-void Manager::init(Node* _sed, int* _rows, Board* G, sf::Color bcolor){
-	instance=new Manager(_sed, _rows, G, bcolor);
-	static Supervisor Sp(instance);
-}
-
-
 
 
 
