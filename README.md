@@ -24,6 +24,6 @@ defining a proper method to do the job.
 
 - working on some improments now...
 
-Video [here](http://46.32.229.68/img/tetrix.html)
+Video [here](http://103.102.44.126/img/tetrix.html)
 
-![Example](http://46.32.229.68/img/tetrix.png)
+![Example](http://103.102.44.126/img/tetrix.png)
