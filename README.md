@@ -24,6 +24,6 @@ defining a proper method to do the job.
 
 - working on some improments now...
 
-Video [here](http://103.102.44.126/img/tetrix.html)
+~~Video~~ [here](ht tp:te tr ix. html)
 
 ![Example](https://i.postimg.cc/wxL72WrX/tetrix.png)
